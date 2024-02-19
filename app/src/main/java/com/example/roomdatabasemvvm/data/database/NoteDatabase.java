@@ -11,7 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Note.class}, version = 2)
+@Database(entities = {Note.class}, version = 1)
 public abstract class NoteDatabase extends RoomDatabase {
 
     private static NoteDatabase instance;

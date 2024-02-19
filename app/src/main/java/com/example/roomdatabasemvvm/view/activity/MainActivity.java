@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
                             int id = data.getIntExtra("EXTRA_ID", -1);
 
-                            if (id != -1) {
+                            if (id != -1) { // not necessary
 
                                 String title = data.getStringExtra("EXTRA_TITLE");
                                 String description = data.getStringExtra("EXTRA_DESCRIPTION");

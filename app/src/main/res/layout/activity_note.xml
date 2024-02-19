@@ -19,15 +19,15 @@
             android:layout_centerVertical="true"
             android:fontFamily="@font/poppins"
             android:includeFontPadding="false"
+            android:text="@string/add_note"
             android:textColor="@color/orange"
-            android:textSize="22sp"
-            tools:text="Add/Edit Note" />
+            android:textSize="22sp" />
 
         <ImageView
             android:id="@+id/done_image_view"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:src="@drawable/baseline_done" />
     </RelativeLayout>
 
@@ -40,7 +40,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/outlined_border"
         android:fontFamily="@font/open_sans"
-        android:hint="Enter Title"
+        android:hint="@string/title_hint"
         android:maxLines="1"
         android:padding="10dp"
         android:textSize="22sp" />
@@ -53,7 +53,7 @@
         android:background="@drawable/outlined_border"
         android:fontFamily="@font/open_sans"
         android:gravity="start"
-        android:hint="Description"
+        android:hint="@string/description_hint"
         android:inputType="textMultiLine"
         android:padding="10dp"
         android:textSize="20sp" />

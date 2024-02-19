@@ -36,9 +36,7 @@ public class NoteActivity extends AppCompatActivity {
         if (intent.hasExtra("EXTRA_ID")) { // for note edit purpose
             titleET.setText(intent.getStringExtra("EXTRA_TITLE"));
             descriptionET.setText(intent.getStringExtra("EXTRA_DESCRIPTION"));
-            addEditTextView.setText("Edit Note");
-        } else {
-            addEditTextView.setText("Add Note");
+            addEditTextView.setText(getResources().getString(R.string.edit_note));
         }
     }
 
@@ -48,13 +46,14 @@ public class NoteActivity extends AppCompatActivity {
         String description = descriptionET.getText().toString();
 
         Intent data = new Intent();
-        data.putExtra("EXTRA_TITLE", title);
-        data.putExtra("EXTRA_DESCRIPTION", description);
 
         int id = getIntent().getIntExtra("EXTRA_ID", -1);
         if (id != -1) {
             data.putExtra("EXTRA_ID", id); // condition to put id only when there is a need to update note
         }
+
+        data.putExtra("EXTRA_TITLE", title);
+        data.putExtra("EXTRA_DESCRIPTION", description);
 
         setResult(AppCompatActivity.RESULT_OK, data);
     }
