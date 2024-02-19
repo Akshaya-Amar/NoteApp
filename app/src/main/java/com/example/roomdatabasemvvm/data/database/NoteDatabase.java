@@ -1,4 +1,4 @@
-package com.example.roomdatabasemvvm;
+package com.example.roomdatabasemvvm.data.database;
 
 import android.app.Application;
 
@@ -21,7 +21,10 @@ public abstract class NoteDatabase extends RoomDatabase {
     public static synchronized NoteDatabase getInstance(Application application) {
 
         if (instance == null) {
-            instance = Room.databaseBuilder(application.getApplicationContext(), NoteDatabase.class, "note_database")
+            instance = Room.databaseBuilder(
+                            application.getApplicationContext(),
+                            NoteDatabase.class,
+                            "note_database")
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback)
                     .build();

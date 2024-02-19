@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.roomdatabasemvvm.Note;
+import com.example.roomdatabasemvvm.data.database.Note;
 import com.example.roomdatabasemvvm.data.repository.NoteRepository;
 
 import java.util.List;

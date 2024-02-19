@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.roomdatabasemvvm.Note;
+import com.example.roomdatabasemvvm.data.database.Note;
 import com.example.roomdatabasemvvm.R;
 import com.example.roomdatabasemvvm.databinding.NoteItemBinding;
 

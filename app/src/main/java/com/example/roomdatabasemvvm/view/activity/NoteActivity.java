@@ -1,29 +1,19 @@
 package com.example.roomdatabasemvvm.view.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.roomdatabasemvvm.R;
-import com.google.android.material.timepicker.MaterialTimePicker;
-import com.google.android.material.timepicker.TimeFormat;
 
 public class NoteActivity extends AppCompatActivity {
 
     private EditText titleET;
     private EditText descriptionET;
-    private TextView addEditTextView;
-    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +22,9 @@ public class NoteActivity extends AppCompatActivity {
 
         titleET = findViewById(R.id.title_edit_text);
         descriptionET = findViewById(R.id.description_edit_text);
-        addEditTextView = findViewById(R.id.add_edit_text_view);
-        imageView = findViewById(R.id.done_image_view);
+        TextView addEditTextView = findViewById(R.id.add_edit_text_view);
 
-        imageView.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.done_image_view).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveNote();

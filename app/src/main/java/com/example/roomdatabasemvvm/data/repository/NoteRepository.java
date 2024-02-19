@@ -4,9 +4,9 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.roomdatabasemvvm.Note;
-import com.example.roomdatabasemvvm.NoteDao;
-import com.example.roomdatabasemvvm.NoteDatabase;
+import com.example.roomdatabasemvvm.data.database.Note;
+import com.example.roomdatabasemvvm.data.database.NoteDao;
+import com.example.roomdatabasemvvm.data.database.NoteDatabase;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;

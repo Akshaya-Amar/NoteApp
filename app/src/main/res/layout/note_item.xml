@@ -7,7 +7,7 @@
 
         <variable
             name="noteModel"
-            type="com.example.roomdatabasemvvm.Note" />
+            type="com.example.roomdatabasemvvm.data.database.Note" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
