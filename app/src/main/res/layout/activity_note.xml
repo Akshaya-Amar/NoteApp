@@ -31,7 +31,7 @@
             android:src="@drawable/baseline_done" />
     </RelativeLayout>
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/title_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,20 +41,29 @@
         android:background="@drawable/outlined_border"
         android:fontFamily="@font/open_sans"
         android:hint="@string/title_hint"
+        android:inputType="text"
         android:maxLines="1"
         android:padding="10dp"
         android:textSize="22sp" />
 
-    <EditText
-        android:id="@+id/description_edit_text"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:background="@drawable/outlined_border"
-        android:fontFamily="@font/open_sans"
-        android:gravity="start"
-        android:hint="@string/description_hint"
-        android:inputType="textMultiLine"
-        android:padding="10dp"
-        android:textSize="20sp" />
+        android:fillViewport="true"
+        android:scrollbarSize="@dimen/cardview_compat_inset_shadow"
+        android:scrollbars="vertical">
+
+        <EditText
+            android:id="@+id/description_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/outlined_border"
+            android:fontFamily="@font/open_sans"
+            android:gravity="top"
+            android:hint="@string/description_hint"
+            android:inputType="textMultiLine"
+            android:padding="10dp"
+            android:textSize="20sp" />
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -12,24 +12,53 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:background="#FBFBFB"
         android:layout_height="match_parent"
+        android:background="#FBFBFB"
         tools:context=".view.activity.MainActivity">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/search_text_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/orange"
+                app:hintEnabled="false"
+                app:startIconDrawable="@drawable/baseline_search">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/search_text_input_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Search note"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <TextView
                 android:id="@+id/my_notes_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_below="@+id/search_text_input_layout"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:fontFamily="@font/poppins_medium"
                 android:includeFontPadding="false"
-                android:text="My Notes"
+                android:text="@{noteViewModel.allNotes.size() != 0 ? @string/my_notes : @string/no_note}"
                 android:textColor="@color/orange"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                tools:text="@string/my_notes" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
@@ -49,6 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
+            android:contentDescription="@string/add_note"
             android:src="@drawable/baseline_add"
             app:backgroundTint="@color/orange"
             app:tint="@color/white" />

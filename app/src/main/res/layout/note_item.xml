@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="noteModel"
             type="com.example.roomdatabasemvvm.data.database.Note" />
@@ -35,6 +34,7 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/poppins"
                     android:includeFontPadding="false"
+                    android:maxLines="1"
                     android:text="@{noteModel.title}"
                     android:textColor="@color/orange"
                     android:textSize="24sp"

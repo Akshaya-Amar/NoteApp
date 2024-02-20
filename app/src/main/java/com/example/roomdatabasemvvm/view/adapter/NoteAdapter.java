@@ -13,6 +13,7 @@ import com.example.roomdatabasemvvm.data.database.Note;
 import com.example.roomdatabasemvvm.R;
 import com.example.roomdatabasemvvm.databinding.NoteItemBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
@@ -54,6 +55,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     public Note getNoteAt(int position) {
         return noteList.get(position);
+    }
+
+    public void filterList(ArrayList<Note> filteredList) {
+        noteList = filteredList;
+        notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

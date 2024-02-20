@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">RoomDatabaseMVVM</string>
+    <string name="my_notes">My Notes</string>
+    <string name="no_note">No Note</string>
     <string name="add_note">Add Note</string>
     <string name="edit_note">Edit Note</string>
     <string name="title_hint">Enter Title</string>

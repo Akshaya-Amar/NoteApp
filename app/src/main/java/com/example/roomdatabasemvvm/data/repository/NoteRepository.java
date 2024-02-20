@@ -13,6 +13,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class NoteRepository {
+
     private final NoteDao noteDao;
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
@@ -34,7 +35,7 @@ public class NoteRepository {
     }
 
     public void deleteAllNotes() {
-        noteDao.deleteAllNotes();
+        executorService.execute(() -> noteDao.deleteAllNotes());
     }
 
     public LiveData<List<Note>> getAllNotes() {
