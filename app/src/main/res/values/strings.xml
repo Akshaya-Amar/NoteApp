@@ -6,4 +6,5 @@
     <string name="edit_note">Edit Note</string>
     <string name="title_hint">Enter Title</string>
     <string name="description_hint">Description</string>
+    <string name="search_for_notes">Search for notes</string>
 </resources>

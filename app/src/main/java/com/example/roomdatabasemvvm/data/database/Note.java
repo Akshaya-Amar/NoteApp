@@ -15,8 +15,6 @@ public class Note {
 
     private final String description;
 
-//    private final int priority;
-
     public Note(String title, String description) {
         this.title = title;
         this.description = description;
@@ -37,8 +35,4 @@ public class Note {
     public String getDescription() {
         return description;
     }
-
-    /*public int getPriority() {
-        return priority;
-    }*/
 }

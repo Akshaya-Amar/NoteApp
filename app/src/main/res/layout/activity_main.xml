@@ -36,10 +36,11 @@
                     android:id="@+id/search_text_input_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Search note"
+                    android:fontFamily="@font/poppins"
+                    android:hint="@string/search_for_notes"
+                    android:includeFontPadding="false"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:padding="10dp"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -52,7 +53,6 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
                 android:fontFamily="@font/poppins_medium"
                 android:includeFontPadding="false"
                 android:text="@{noteViewModel.allNotes.size() != 0 ? @string/my_notes : @string/no_note}"

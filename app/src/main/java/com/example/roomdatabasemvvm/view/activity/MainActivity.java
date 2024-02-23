@@ -32,6 +32,8 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int ADD_NOTE_REQUEST = 1;
+    private static final int UPDATE_NOTE_REQUEST = 2;
     private ActivityMainBinding binding;
     private NoteViewModel noteViewModel;
     private RecyclerView recyclerView;
@@ -77,16 +79,18 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("EXTRA_ID", note.getId());
             intent.putExtra("EXTRA_TITLE", note.getTitle());
             intent.putExtra("EXTRA_DESCRIPTION", note.getDescription());
-            activityResultLauncherUpdateNote.launch(intent);
+            activityResultLauncher.launch(intent);
         });
 
         binding.newNoteFloatingActionButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, NoteActivity.class);
-            activityResultLauncherAddNote.launch(intent);
+            activityResultLauncher.launch(intent);
         });
     }
 
-    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(
+            0,
+            ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
             return false;
@@ -142,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.filterList(filteredList);
     }
 
-    private final ActivityResultLauncher<Intent> activityResultLauncherAddNote = registerForActivityResult(
+    private final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -154,51 +158,53 @@ public class MainActivity extends AppCompatActivity {
 
                         if (data != null) {
 
-                            String title = data.getStringExtra("EXTRA_TITLE");
-                            String description = data.getStringExtra("EXTRA_DESCRIPTION");
+                            int operationType = data.getIntExtra("OPERATION_TYPE", -1);
 
-                            Note note = new Note(title, description);
-                            noteViewModel.insert(note);
-                            Snackbar.make(rootElement, "Note saved", Snackbar.LENGTH_LONG).show();
+                            switch (operationType) {
+                                case ADD_NOTE_REQUEST:
+                                    addNewNote(data);
+                                    break;
+
+                                case UPDATE_NOTE_REQUEST:
+                                    updateCurrentNote(data);
+                                    break;
+
+                                default:
+                                    Snackbar.make(rootElement, "Operation not specified", Snackbar.LENGTH_LONG).show();
+                            }
                         }
-                    } else {
+                    } else { // when we hit the back button, without saving the note
                         Snackbar.make(rootElement, "Note not saved", Snackbar.LENGTH_LONG).show();
                     }
                 }
-            });
+            }
+    );
 
-    private final ActivityResultLauncher<Intent> activityResultLauncherUpdateNote = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == AppCompatActivity.RESULT_OK) {
+    private Note getNoteData(Intent data) {
+        String title = data.getStringExtra("EXTRA_TITLE");
+        String description = data.getStringExtra("EXTRA_DESCRIPTION");
+        return new Note(title, description);
+    }
 
-                        Intent data = result.getData();
+    private void addNewNote(Intent data) {
+        Note note = getNoteData(data);
+        noteViewModel.insert(note);
+        Snackbar.make(rootElement, "New Note added", Snackbar.LENGTH_LONG).show();
+    }
 
-                        if (data != null) {
+    private void updateCurrentNote(Intent data) {
 
-                            int id = data.getIntExtra("EXTRA_ID", -1);
+        int id = data.getIntExtra("EXTRA_ID", -1);
 
-                            if (id != -1) { // not necessary
-
-                                String title = data.getStringExtra("EXTRA_TITLE");
-                                String description = data.getStringExtra("EXTRA_DESCRIPTION");
-
-                                Note note = new Note(title, description);
-                                note.setId(id);
-                                noteViewModel.update(note);
-
-                                Snackbar.make(rootElement, "Note updated", Snackbar.LENGTH_LONG).show();
-                            } else {
-                                Snackbar.make(rootElement, "Unable to update note", Snackbar.LENGTH_LONG).show();
-                            }
-                        }
-                    } else {
-                        Snackbar.make(rootElement, "Note not updated", Snackbar.LENGTH_LONG).show();
-                    }
-                }
-            });
+        if (id != -1) {
+            Note note = getNoteData(data);
+            note.setId(id);
+            noteViewModel.update(note);
+            Snackbar.make(rootElement, "Note updated", Snackbar.LENGTH_LONG).show();
+        } else {
+            Snackbar.make(rootElement, "Unable to update Note", Snackbar.LENGTH_LONG).show();
+        }
+    }
 
     @Override
     protected void onResume() {
