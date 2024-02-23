@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
-            name="noteModel"
+            name="note"
             type="com.example.roomdatabasemvvm.data.database.Note" />
     </data>
 
@@ -39,7 +38,7 @@
                     android:fontFamily="@font/poppins"
                     android:includeFontPadding="false"
                     android:maxLines="1"
-                    android:text="@{noteModel.title}"
+                    android:text="@{note.title}"
                     android:textColor="@color/orange"
                     android:textSize="24sp"
                     tools:text="Title" />
@@ -50,9 +49,21 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/open_sans"
                     android:maxLines="1"
-                    android:text="@{noteModel.description}"
+                    android:text="@{note.description}"
                     android:textSize="18sp"
                     tools:text="Description" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/open_sans"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:text="@{note.currentDateTime}"
+                    android:textStyle="italic"
+                    tools:text="Fri Feb 23, 4:42:33 PM" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

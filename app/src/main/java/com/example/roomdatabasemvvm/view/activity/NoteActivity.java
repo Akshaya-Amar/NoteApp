@@ -9,11 +9,13 @@ import com.example.roomdatabasemvvm.R;
 import com.example.roomdatabasemvvm.databinding.ActivityNoteBinding;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class NoteActivity extends AppCompatActivity {
 
     private ActivityNoteBinding binding;
-    private static final int ADD_NOTE_OPERATION = 1;
-    private static final int UPDATE_NOTE_OPERATION = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +50,19 @@ public class NoteActivity extends AppCompatActivity {
 
         data.putExtra("EXTRA_TITLE", title);
         data.putExtra("EXTRA_DESCRIPTION", description);
-        data.putExtra("OPERATION_TYPE", ADD_NOTE_OPERATION);
+        data.putExtra("EXTRA_DATE_TIME", getCurrentDateTime());
 
         int id = getIntent().getIntExtra("EXTRA_ID", -1);
         if (id != -1) {
             data.putExtra("EXTRA_ID", id); // condition to put id only when there is a need to update note
-            data.putExtra("OPERATION_TYPE", UPDATE_NOTE_OPERATION);
         }
 
         setResult(AppCompatActivity.RESULT_OK, data);
         finish();
+    }
+
+    public static String getCurrentDateTime() {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd, h:mm:ss a", Locale.getDefault());
+        return inputFormat.format(new Date());
     }
 }

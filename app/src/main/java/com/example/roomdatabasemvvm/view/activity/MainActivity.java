@@ -32,8 +32,6 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int ADD_NOTE_REQUEST = 1;
-    private static final int UPDATE_NOTE_REQUEST = 2;
     private ActivityMainBinding binding;
     private NoteViewModel noteViewModel;
     private RecyclerView recyclerView;
@@ -158,19 +156,10 @@ public class MainActivity extends AppCompatActivity {
 
                         if (data != null) {
 
-                            int operationType = data.getIntExtra("OPERATION_TYPE", -1);
-
-                            switch (operationType) {
-                                case ADD_NOTE_REQUEST:
-                                    addNewNote(data);
-                                    break;
-
-                                case UPDATE_NOTE_REQUEST:
-                                    updateCurrentNote(data);
-                                    break;
-
-                                default:
-                                    Snackbar.make(rootElement, "Operation not specified", Snackbar.LENGTH_LONG).show();
+                            if (!data.hasExtra("EXTRA_ID")) {
+                                addNewNote(data);
+                            } else {
+                                updateCurrentNote(data);
                             }
                         }
                     } else { // when we hit the back button, without saving the note
@@ -179,12 +168,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
     );
-
-    private Note getNoteData(Intent data) {
-        String title = data.getStringExtra("EXTRA_TITLE");
-        String description = data.getStringExtra("EXTRA_DESCRIPTION");
-        return new Note(title, description);
-    }
 
     private void addNewNote(Intent data) {
         Note note = getNoteData(data);
@@ -204,6 +187,13 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Snackbar.make(rootElement, "Unable to update Note", Snackbar.LENGTH_LONG).show();
         }
+    }
+
+    private Note getNoteData(Intent data) {
+        String title = data.getStringExtra("EXTRA_TITLE");
+        String description = data.getStringExtra("EXTRA_DESCRIPTION");
+        String currentDateTime = data.getStringExtra("EXTRA_DATE_TIME");
+        return new Note(title, description, currentDateTime);
     }
 
     @Override

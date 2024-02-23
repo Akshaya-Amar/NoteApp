@@ -14,10 +14,13 @@ public class Note {
     private final String title;
 
     private final String description;
+    @ColumnInfo(name = "current_date_time")
+    private final String currentDateTime;
 
-    public Note(String title, String description) {
+    public Note(String title, String description, String currentDateTime) {
         this.title = title;
         this.description = description;
+        this.currentDateTime = currentDateTime;
     }
 
     public void setId(int id) {
@@ -34,5 +37,9 @@ public class Note {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getCurrentDateTime() {
+        return currentDateTime;
     }
 }
